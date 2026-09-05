@@ -1,84 +1,84 @@
-# CPU Zamanlama Simülatörü
+# CPU Scheduling Simulator
 
-Java Swing kullanılarak geliştirilmiş bir **CPU zamanlama simülasyonu** uygulamasıdır.
+A **CPU scheduling simulation** application developed using Java Swing.
 
-Uygulama, farklı CPU zamanlama algoritmalarını aynı işlem verileri üzerinde çalıştırarak sonuçları karşılaştırır. İşlemlerin çalışma sırası ve zaman aralıkları Gantt şeması ile görselleştirilirken, ortalama bekleme süresi, turnaround süresi ve CPU kullanım oranı gibi performans değerleri hesaplanır.
+The application runs different CPU scheduling algorithms on the same process data and compares their results. The execution order and time intervals of processes are represented using a Gantt chart, while performance metrics such as average waiting time, turnaround time, and CPU utilization are calculated.
 
-## Özellikler
+## Features
 
-* 📂 `.txt` dosyasından işlem verisi yükleme
-* ✏️ Manuel işlem girişi
-* 🎲 Rastgele işlem verisi oluşturma
-* ⏱️ Zaman kuantumu belirleme
-* 📊 Gantt şeması oluşturma
-* 📈 Algoritmaların performans karşılaştırması
-* 🧮 Ortalama bekleme süresi hesaplama
-* 🧮 Ortalama turnaround süresi hesaplama
-* 💻 CPU kullanım oranı hesaplama
-* 🤖 Performans sonuçlarına göre algoritma sıralaması
-* ⏳ Simülasyon sırasında ilerleme göstergesi
+* 📂 Load process data from a `.txt` file
+* ✏️ Manual process input
+* 🎲 Generate random process data
+* ⏱️ Set the time quantum
+* 📊 Generate Gantt chart representations
+* 📈 Compare algorithm performance
+* 🧮 Calculate average waiting time
+* 🧮 Calculate average turnaround time
+* 💻 Calculate CPU utilization
+* 🤖 Rank algorithms based on performance results
+* ⏳ Display simulation progress
 
-## Kullanılan Algoritmalar
+## Implemented Algorithms
 
 ### 1. FCFS (First Come First Served)
 
-İşlemleri geliş zamanlarına göre sırayla çalıştırır.
+Executes processes in the order of their arrival times.
 
-**Özellikleri:**
+**Characteristics:**
 
-* Basit ve anlaşılır bir planlama yöntemidir.
-* İşlem sırası geliş zamanına göre belirlenir.
-* İşlem başladıktan sonra tamamlanana kadar devam eder.
+* Simple and easy-to-understand scheduling method
+* Process order is determined by arrival time
+* Once a process starts, it continues until completion
 
 ### 2. SJF (Shortest Job First)
 
-Hazır durumda bulunan işlemler arasından çalışma süresi en kısa olan işlemi seçer.
+Selects the process with the shortest burst time among the available processes.
 
-**Özellikleri:**
+**Characteristics:**
 
-* Non-preemptive olarak uygulanmıştır.
-* Kısa işlem sürelerine sahip işlemleri önceliklendirir.
-* Ortalama bekleme süresini azaltmada avantaj sağlayabilir.
+* Implemented as a non-preemptive algorithm
+* Prioritizes processes with shorter burst times
+* Can reduce average waiting time in certain workloads
 
 ### 3. Round Robin
 
-İşlemleri belirlenen **zaman kuantumu (Quantum)** süresince çalıştırır.
+Executes processes for a specified **time quantum**.
 
-İşlem tamamlanmadığında işlem kuyruğun sonuna eklenir ve sıradaki işleme geçilir.
+If a process is not completed within its time quantum, it is moved to the end of the queue and the next process is executed.
 
-**Özellikleri:**
+**Characteristics:**
 
-* Preemptive bir algoritmadır.
-* Zaman kuantumu kullanıcı tarafından belirlenebilir.
-* İşlemler arasında daha dengeli bir CPU paylaşımı sağlar.
+* Preemptive scheduling algorithm
+* Time quantum can be configured by the user
+* Provides a more balanced CPU allocation between processes
 
 ### 4. Priority Scheduling
 
-İşlemleri öncelik değerlerine göre sıralar.
+Schedules processes according to their priority values.
 
-Bu projede daha düşük öncelik değeri daha yüksek öncelik olarak kabul edilmiştir.
+In this project, a **lower priority value represents a higher priority**.
 
-**Özellikleri:**
+**Characteristics:**
 
-* Non-preemptive olarak uygulanmıştır.
-* İşlemlerin priority değerleri karşılaştırılır.
-* Önceliği daha yüksek olan işlem önce çalıştırılır.
+* Implemented as a non-preemptive algorithm
+* Compares the priority values of processes
+* Higher-priority processes are executed first
 
-## Giriş Yöntemleri
+## Input Methods
 
-Uygulamada iki farklı veri giriş yöntemi bulunmaktadır.
+The application provides two different methods for entering process data.
 
-### Dosyadan Yükleme
+### File Input
 
-`.txt` dosyasından işlem bilgileri okunabilir.
+Process information can be loaded from a `.txt` file.
 
-Dosyadaki her satır aşağıdaki formatta olmalıdır:
+Each line in the file must follow this format:
 
 ```text
-ProcessID,GelişZamanı,ÇalışmaSüresi,Öncelik
+ProcessID,ArrivalTime,BurstTime,Priority
 ```
 
-Örnek:
+Example:
 
 ```text
 P1,0,5,2
@@ -87,119 +87,119 @@ P3,2,8,3
 P4,3,4,2
 ```
 
-### Manuel Giriş
+### Manual Input
 
-Kullanıcı arayüz üzerinden işlemleri tabloya manuel olarak girebilir.
+Users can manually enter processes through the graphical interface.
 
-Tabloda aşağıdaki bilgiler kullanılır:
+The following information is used:
 
-| Alan         | Açıklama                      |
-| ------------ | ----------------------------- |
-| Process ID   | İşlemin kimliği               |
-| Arrival Time | İşlemin sisteme geliş zamanı  |
-| Burst Time   | İşlemin CPU'da çalışma süresi |
-| Priority     | İşlemin öncelik değeri        |
+| Field        | Description                                |
+| ------------ | ------------------------------------------ |
+| Process ID   | Unique identifier of the process           |
+| Arrival Time | Time at which the process arrives          |
+| Burst Time   | CPU execution time required by the process |
+| Priority     | Priority value of the process              |
 
-Ayrıca rastgele işlem verisi oluşturma özelliği de bulunmaktadır.
+The application also provides a feature for generating random process data.
 
-## Performans Analizi
+## Performance Analysis
 
-Her algoritmanın sonucunda aşağıdaki değerler hesaplanır:
+The following metrics are calculated for each scheduling algorithm.
 
-### Turnaround Süresi
+### Turnaround Time
 
-Bir işlemin sisteme gelişinden tamamlanmasına kadar geçen toplam süredir.
+The total time from a process's arrival until its completion.
 
 ```text
-Turnaround Time = Bitiş Zamanı - Geliş Zamanı
+Turnaround Time = Finish Time - Arrival Time
 ```
 
-### Bekleme Süresi
+### Waiting Time
 
-İşlemin hazır kuyruğunda beklediği toplam süredir.
+The total time a process spends waiting in the ready queue.
 
 ```text
 Waiting Time = Turnaround Time - Burst Time
 ```
 
-### CPU Kullanımı
+### CPU Utilization
 
-CPU'nun aktif olarak çalıştığı sürenin toplam süreye oranıdır.
+The ratio of the time the CPU is actively executing processes to the total simulation time.
 
 ```text
-CPU Kullanımı = Toplam Burst Time / Toplam Süre × 100
+CPU Utilization = Total Burst Time / Total Time × 100
 ```
 
-## Gantt Şeması
+## Gantt Chart
 
-Simülasyon sonucunda işlemlerin CPU üzerindeki çalışma sırası görsel olarak gösterilir.
+The execution order of processes on the CPU is displayed after the simulation.
 
-Örneğin:
+Example:
 
 ```text
 [0]---P1---[5]---P2---[8]---P3---[16]
 ```
 
-Bu gösterim sayesinde algoritmanın işlemleri hangi sırayla çalıştırdığı ve her işlemin ne kadar süre CPU kullandığı görülebilir.
+This representation makes it possible to see the execution order of the processes and how long each process uses the CPU.
 
-## Algoritma Karşılaştırması
+## Algorithm Comparison
 
-Simülasyon tamamlandıktan sonra algoritmaların **ortalama bekleme süreleri** karşılaştırılır.
+After the simulation is completed, the algorithms are compared based on their **average waiting time**.
 
-Algoritmalar, ortalama bekleme süresi düşük olandan yüksek olana doğru sıralanır.
+Algorithms are ranked from the lowest to the highest average waiting time.
 
-Örnek:
+Example:
 
 ```text
-=== PERFORMANS KARŞILAŞTIRMASI ===
+=== PERFORMANCE COMPARISON ===
 
-1. SJF                  : 3.2500 birim
-2. Priority             : 4.0000 birim
-3. FCFS                 : 5.7500 birim
-4. Round                : 6.5000 birim
+1. SJF                  : 3.2500 units
+2. Priority             : 4.0000 units
+3. FCFS                 : 5.7500 units
+4. Round                : 6.5000 units
 ```
 
-Ayrıca en düşük ortalama bekleme süresine sahip algoritma belirlenerek sonuç bölümünde gösterilir.
+The algorithm with the lowest average waiting time is also identified and displayed in the results section.
 
-## Arayüz
+## User Interface
 
-Uygulama Java Swing kullanılarak grafiksel bir kullanıcı arayüzü ile geliştirilmiştir.
+The application was developed with a graphical user interface using Java Swing.
 
-Arayüz üç ana sekmeden oluşmaktadır:
+The interface consists of three main tabs:
 
-### Dosyadan Yükle
+### Load from File
 
-* `.txt` dosyası seçme
-* Zaman kuantumu belirleme
-* Simülasyonu başlatma
+* Select a `.txt` file
+* Set the time quantum
+* Start the simulation
 
-### Manuel Giriş
+### Manual Input
 
-* İşlem ekleme
-* İşlem bilgilerini düzenleme
-* Rastgele veri oluşturma
-* Verileri temizleme
-* Zaman kuantumu belirleme
-* Simülasyonu çalıştırma
+* Add processes
+* Edit process information
+* Generate random data
+* Clear process data
+* Set the time quantum
+* Run the simulation
 
-### Analiz ve Grafik
+### Analysis and Charts
 
-* Algoritma performans karşılaştırması
-* Ortalama bekleme süresi sıralaması
-* En iyi algoritmanın belirlenmesi
-* Gantt şeması / grafik gösterimi
+* Compare algorithm performance
+* Rank algorithms by average waiting time
+* Identify the best-performing algorithm
+* Display Gantt chart and performance visualization
 
-## Kullanılan Teknolojiler
+## Technologies
 
 * **Java**
 * **Java Swing**
 * **AWT**
-* **Nesne Yönelimli Programlama**
-* **Dosya İşlemleri**
-* **Veri Yapıları**
-* **CPU Zamanlama Algoritmaları**
+* **Object-Oriented Programming (OOP)**
+* **File I/O**
+* **Data Structures**
+* **CPU Scheduling Algorithms**
 
-## Proje Yapısı
+## Project Structure
 
 ```text
 ProcessSchedule/
@@ -211,54 +211,54 @@ ProcessSchedule/
 └── README.md
 ```
 
-> `.class` dosyaları Java kaynak kodunun derlenmiş çıktılarıdır. Projenin temel kaynak dosyası `ProcessScheduler.java` dosyasıdır.
+> `.class` files are compiled outputs generated from the Java source code. The main source file of the project is `ProcessScheduler.java`.
 
-## Çalıştırma
+## How to Run
 
-Bilgisayarınızda Java JDK'nın kurulu olması gerekir.
+Java JDK must be installed on your computer.
 
-### Kaynak koddan çalıştırma
+### Run from Source Code
 
-Terminali `ProcessScheduler.java` dosyasının bulunduğu klasörde açın.
+Open a terminal in the directory containing `ProcessScheduler.java`.
 
-Derlemek için:
+Compile the application:
 
 ```bash
 javac ProcessScheduler.java
 ```
 
-Çalıştırmak için:
+Run the application:
 
 ```bash
 java ProcessScheduler
 ```
 
-### JAR dosyasını çalıştırma
+### Run the JAR File
 
-Hazır `.jar` dosyasını kullanmak için:
+To run the precompiled `.jar` file:
 
 ```bash
 java -jar ProcessScheduler.jar
 ```
 
-## Projenin Amacı
+## Project Purpose
 
-Bu proje ile CPU zamanlama algoritmalarının çalışma mantığının uygulamalı olarak incelenmesi amaçlanmıştır.
+The purpose of this project is to provide a practical way to study and understand CPU scheduling algorithms.
 
-Aynı işlem kümesinin farklı algoritmalar kullanılarak planlanması ve sonuçların karşılaştırılması sayesinde algoritmalar arasındaki performans farklılıklarının gözlemlenmesi hedeflenmiştir.
+By scheduling the same set of processes using different algorithms and comparing their results, the project allows users to observe performance differences between scheduling approaches.
 
-Ayrıca Java Swing kullanılarak algoritmaların yalnızca konsol çıktısı yerine grafiksel bir arayüz üzerinden incelenmesi sağlanmıştır.
+The project also provides a graphical interface using Java Swing, allowing scheduling algorithms to be analyzed visually instead of relying only on console output.
 
-## Geliştirilebilecek Özellikler
+## Future Improvements
 
-* Yeni CPU zamanlama algoritmalarının eklenmesi
-* SRTF gibi preemptive algoritmaların eklenmesi
-* Daha ayrıntılı Gantt şeması
-* Algoritmaların daha fazla performans kriterine göre karşılaştırılması
-* Sonuçların dosyaya aktarılması
-* Grafiklerin geliştirilmesi
-* Kullanıcı arayüzünün geliştirilmesi
+* Add additional CPU scheduling algorithms
+* Implement preemptive algorithms such as SRTF
+* Create a more detailed Gantt chart
+* Compare algorithms using additional performance metrics
+* Export simulation results to files
+* Improve performance visualizations
+* Enhance the graphical user interface
 
-## Geliştirici
+## Developer
 
 **Sude Sena Aydın**
